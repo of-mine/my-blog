@@ -1,33 +1,69 @@
+/* 引入 Google Fonts：Lora 用于标题（衬线，文艺感），Nunito 用于正文（圆润易读） */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Nunito:wght@300;400;500;600&display=swap');
+
+/* Tailwind 三件套，必须保留 */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ── 全局 CSS 变量：统一管理颜色，改一个地方全站生效 ── */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --teal-50:  #f0fafa;   /* 最浅，用于背景填充 */
+  --teal-100: #ccefee;   /* 浅色，用于边框、标签背景 */
+  --teal-200: #99dbd9;   /* 中浅，用于装饰线 */
+  --teal-300: #5ec4c1;   /* 中色，用于渐变、强调 */
+  --teal-400: #35a8a5;   /* 主色，用于标题、按钮 */
+  --teal-500: #258a87;   /* 深色，用于 hover 状态 */
+  --text-main: #2d4a49;  /* 主文字色 */
+  --text-muted: #7aa8a7; /* 次要文字色，用于日期、摘要等 */
+  --border: #c5e8e7;     /* 边框色 */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; } /* 页面内锚点跳转时平滑滚动 */
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: 'Nunito', sans-serif;
+  color: var(--text-main);
+  min-height: 100vh;
+  /* 页面背景渐变：从米白 → 浅青绿，160deg 是渐变角度,就像一个时钟，按360度记的渐变角度 ，后面的百分号是渐变的线*/
+  background: linear-gradient(160deg, #fafffe 0%, #44ba5c 60%, #2d685c 100%);
+  /* fixed 让背景固定不动，页面内容在上面滚动，避免渐变随滚动重复 */
+  background-attachment: fixed;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* ── 文章正文排版样式（配合 Tailwind Typography 插件使用）── */
+.prose-teal p {
+  color: #3d5e5d;
+  line-height: 1.85; /* 行高宽松，中文阅读体验更好 */
 }
+.prose-teal a {
+  color: var(--teal-400);
+  text-decoration-color: var(--teal-200); /* 链接下划线用浅色 */
+}
+.prose-teal blockquote {
+  border-left: 3px solid var(--teal-300); /* 引用块左侧竖线 */
+  color: var(--teal-500);
+  font-style: italic;
+}
+.upchar{
+    font-size: 16px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+/*注：react内联和css文件的写法不一样，react内联就是正常直接在html或者tsx文件里定义的样式以逗号结尾，css就是以分号结尾的*/
+/*注：还有区别是他们的命名方式也不同，后面的格式也不需要引号，还有class名字前面要加点（.）其他的东西还要家单位比如大小*/
+}
+.bodychar{
+      font-family: 'Lora', serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--teal-400);
+}
+
+/* ── 自定义滚动条样式── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--teal-50); }  /* 滚动条轨道 */
+::-webkit-scrollbar-thumb { background: var(--teal-200); border-radius: 3px; } /* 滚动条滑块 */

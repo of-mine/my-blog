@@ -15,6 +15,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],// 官方提供的排版插件，增强文章内容的样式
 };
 export default config;
