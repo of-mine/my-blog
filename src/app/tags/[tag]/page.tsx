@@ -6,6 +6,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import type { Metadata } from "next";
 
+
+//本页面是所有标签的标签页搜索
 interface Props {
   params: { tag: string };
 }
@@ -15,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: `#${tag}` };
 }
 
-// 提前生成所有标签页的静态页面
+// 预生成所有标签详情页
 export async function generateStaticParams() {
   return getAllTags().map(({ tag }) => ({ tag: encodeURIComponent(tag) }));
 }

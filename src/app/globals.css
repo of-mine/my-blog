@@ -1,69 +1,152 @@
-/* 引入 Google Fonts：Lora 用于标题（衬线，文艺感），Nunito 用于正文（圆润易读） */
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Nunito:wght@300;400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Nunito:wght@300;400;500;600&display=swap");
 
-/* Tailwind 三件套，必须保留 */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ── 全局 CSS 变量：统一管理颜色，改一个地方全站生效 ── */
 :root {
-  --teal-50:  #f0fafa;   /* 最浅，用于背景填充 */
-  --teal-100: #ccefee;   /* 浅色，用于边框、标签背景 */
-  --teal-200: #99dbd9;   /* 中浅，用于装饰线 */
-  --teal-300: #5ec4c1;   /* 中色，用于渐变、强调 */
-  --teal-400: #35a8a5;   /* 主色，用于标题、按钮 */
-  --teal-500: #258a87;   /* 深色，用于 hover 状态 */
-  --text-main: #2d4a49;  /* 主文字色 */
-  --text-muted: #7aa8a7; /* 次要文字色，用于日期、摘要等 */
-  --border: #c5e8e7;     /* 边框色 */
+  --teal-50: #f0fafa;
+  --teal-100: #ccefee;
+  --teal-200: #99dbd9;
+  --teal-300: #5ec4c1;
+  --teal-400: #35a8a5;
+  --teal-500: #258a87;
+  --text-main: #2d4a49;
+  --text-muted: #7aa8a7;
+  --border: #c5e8e7;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html { scroll-behavior: smooth; } /* 页面内锚点跳转时平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   color: var(--text-main);
   min-height: 100vh;
-  /* 页面背景渐变：从米白 → 浅青绿，160deg 是渐变角度,就像一个时钟，按360度记的渐变角度 ，后面的百分号是渐变的线*/
-  background: linear-gradient(160deg, #fafffe 0%, #44ba5c 60%, #2d685c 100%);
-  /* fixed 让背景固定不动，页面内容在上面滚动，避免渐变随滚动重复 */
+  background: linear-gradient(160deg, #fafffe 0%, #8dd49b 64%, #3ab3c8 100%);
   background-attachment: fixed;
 }
 
-/* ── 文章正文排版样式（配合 Tailwind Typography 插件使用）── */
 .prose-teal p {
   color: #3d5e5d;
-  line-height: 1.85; /* 行高宽松，中文阅读体验更好 */
+  line-height: 1.85;
 }
+
 .prose-teal a {
   color: var(--teal-400);
-  text-decoration-color: var(--teal-200); /* 链接下划线用浅色 */
+  text-decoration-color: var(--teal-200);
 }
+
 .prose-teal blockquote {
-  border-left: 3px solid var(--teal-300); /* 引用块左侧竖线 */
+  border-left: 3px solid var(--teal-300);
   color: var(--teal-500);
   font-style: italic;
 }
-.upchar{
-    font-size: 16px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 12px;
-/*注：react内联和css文件的写法不一样，react内联就是正常直接在html或者tsx文件里定义的样式以逗号结尾，css就是以分号结尾的*/
-/*注：还有区别是他们的命名方式也不同，后面的格式也不需要引号，还有class名字前面要加点（.）其他的东西还要家单位比如大小*/
-}
-.bodychar{
-      font-family: 'Lora', serif;
-      font-size: 24px;
-      font-weight: 500;
-      color: var(--teal-400);
+
+.upchar {
+  font-size: 16px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
 }
 
-/* ── 自定义滚动条样式── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--teal-50); }  /* 滚动条轨道 */
-::-webkit-scrollbar-thumb { background: var(--teal-200); border-radius: 3px; } /* 滚动条滑块 */
+.bodychar {
+  font-family: "Lora", serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--teal-400);
+}
+
+/* 文章详情页正文样式：只影响 className 含 article-prose 的区域。 */
+.article-prose {
+  color: #355857;
+}
+
+.article-prose :where(p, ul, ol) {
+  line-height: 1.95;
+}
+
+.article-prose :where(h2, h3) {
+  position: relative;
+  scroll-margin-top: 6rem;
+}
+
+.article-prose h2 {
+  margin-top: 2.75rem;
+  margin-bottom: 1rem;
+  font-size: 1.75rem;
+  color: #234443;
+}
+
+.article-prose h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.3rem;
+  color: #2e5a59;
+}
+
+.article-prose h2 a,
+.article-prose h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.article-prose h2 a:hover,
+.article-prose h3 a:hover {
+  color: var(--teal-500);
+}
+
+.article-prose blockquote {
+  border-left-width: 4px;
+  border-left-color: var(--teal-300);
+  background: linear-gradient(90deg, rgba(240, 250, 250, 0.9), rgba(240, 250, 250, 0));
+  border-radius: 0 18px 18px 0;
+  padding: 0.25rem 0 0.25rem 1rem;
+}
+
+.article-prose code {
+  background: rgba(204, 239, 238, 0.55);
+  color: #215a58;
+  border-radius: 0.5rem;
+  padding: 0.15rem 0.4rem;
+}
+
+.article-prose pre {
+  background: rgba(36, 74, 73, 0.92);
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.article-prose pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.article-prose hr {
+  border-color: rgba(153, 219, 217, 0.8);
+}
+
+.article-prose img {
+  border-radius: 1.5rem;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--teal-50);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--teal-200);
+  border-radius: 3px;
+}

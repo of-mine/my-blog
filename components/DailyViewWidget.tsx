@@ -2,12 +2,19 @@
 
 import { useEffect, useState } from "react";
 
+function getLocalDateKey(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 export default function DailyViewWidget() {
   const [views, setViews] = useState<number | null>(null);
 
   useEffect(() => {
-    // 以今天日期为 key，如 "pv_2024-11-20"，每天自动重置
-    const todayKey = `pv_${new Date().toISOString().slice(0, 10)}`;
+    // 用本地日期做 key，避免 UTC 零点导致国内时区提前“跨天”
+    const todayKey = `pv_${getLocalDateKey(new Date())}`;
     // 读取今天已有的浏览次数，没有则默认 0
     const stored = parseInt(localStorage.getItem(todayKey) ?? "0", 10);
     const updated = stored + 1; // 每次访问页面 +1
@@ -25,11 +32,14 @@ export default function DailyViewWidget() {
       textAlign: "center",
     }}>
       <div className="upchar">
-        今日浏览
+        本地今日访问
       </div>
       {/* views 为 null 时显示省略号，数据加载后显示数字 */}
       <div className="bodychar">
         {views ?? "…"}次
+      </div>
+      <div className="text-xs text-stone-400 mt-2">
+        仅统计当前浏览器
       </div>
     </div>
   );
