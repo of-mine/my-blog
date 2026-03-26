@@ -55,7 +55,7 @@ body {
   letter-spacing: 0.08em;
   margin-bottom: 12px;
 }
-
+/*bodychar和upchar是用来组件里面的字的形态和颜色等*/
 .bodychar {
   font-family: "Lora", serif;
   font-size: 24px;

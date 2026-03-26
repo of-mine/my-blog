@@ -38,9 +38,6 @@ export default function DailyViewWidget() {
       <div className="bodychar">
         {views ?? "…"}次
       </div>
-      <div className="text-xs text-stone-400 mt-2">
-        仅统计当前浏览器
-      </div>
     </div>
   );
 }
