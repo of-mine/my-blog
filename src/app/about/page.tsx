@@ -29,7 +29,7 @@ export default function AboutPage() {
           <h2>联系我</h2>
           <p>如果你有任何想法或建议，欢迎通过以下方式找到我：</p>
           <ul>
-            <li>Email：hello@example.com</li>
+            <li>Email：anguowu1@gmail.com</li>
             <li>GitHub：github.com/yourname</li>
           </ul>
         </div>

@@ -3,53 +3,36 @@
 import { useEffect, useState } from "react";
 
 interface Props {
-  launchDate: string; // 建站日期，格式 "YYYY-MM-DD"，在调用时传入
-  inline?: boolean;   // 可选，true = 行内文字模式（用于页脚），false = 卡片模式（用于侧边栏）
+  launchDate: string;
+  inline?: boolean;
 }
 
 export default function SiteAgeWidget({ launchDate, inline = false }: Props) {
-  const [age, setAge] = useState({ days: 0});
+  const [age, setAge] = useState({ days: 0 });
 
   useEffect(() => {
     function calc() {
-      const diff = Date.now() - new Date(launchDate).getTime(); // 毫秒差
-      const totalSec = Math.floor(diff / 1000); // 转换为总秒数
+      const diff = Date.now() - new Date(launchDate).getTime();
+      const totalSec = Math.floor(diff / 1000);
       setAge({
-        days:    Math.floor(totalSec / 86400),          // 86400 = 一天的秒数
+        days: Math.floor(totalSec / 86400),
       });
     }
+
     calc();
-    const timer = setInterval(calc, 1000*60*60); // 每小时重新计算节省性能
+    const timer = setInterval(calc, 1000 * 60 * 60);
     return () => clearInterval(timer);
   }, [launchDate]);
 
-  // 行内模式：只输出一句话，嵌入页脚文字中
   if (inline) {
-    return (
-      <span style={{ color: "var(--teal-400)", fontWeight: 500 }}>
-        {age.days} 天
-      </span>
-    );
+    return <span style={{ color: "var(--teal-400)", fontWeight: 500 }}>{age.days} 天</span>;
   }
 
   return (
-    <div style={{
-      background: "rgba(255,255,255,0.75)",
-      backdropFilter: "blur(8px)",
-      border: "1px solid var(--border)",
-      borderRadius: 20,
-      padding: "1.25rem",
-      textAlign: "center",
-    }}>
-      <div className="upchar">
-        网站运营时长
-      </div>
-
-      {/* 时间单位卡片 */}
-    {/* 数字和"天"在同一行 */}
-    <div className="bodychar">
-      {age.days} 天
-    </div>
+    <div className="rounded-[26px] border border-white/70 bg-[rgba(255,255,255,0.82)] px-5 py-5 text-center shadow-[0_16px_55px_rgba(45,74,73,0.10)] backdrop-blur-xl">
+      <div className="text-xs uppercase tracking-[0.28em] text-stone-400 mb-3">Site Age</div>
+      <div className="font-serif text-3xl text-[var(--teal-500)]">{age.days} 天</div>
+      <div className="text-xs text-[var(--text-muted)] mt-2">从建站起持续累计</div>
     </div>
   );
 }

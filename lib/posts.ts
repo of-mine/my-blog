@@ -138,6 +138,17 @@ export function getAllPosts(): PostMeta[] {
   return posts.sort((a, b) => b.date.localeCompare(a.date));
 }
 
+// 独立搜索页直接复用服务端数据，避免首页和搜索页两套搜索规则不一致。
+export function searchPosts(query: string): PostMeta[] {
+  const normalizedQuery = query.trim().toLowerCase();
+  if (!normalizedQuery) return [];
+
+  return getAllPosts().filter((post) => {
+    const haystack = [post.title, post.excerpt, ...post.tags].join(" ").toLowerCase();
+    return haystack.includes(normalizedQuery);
+  });
+}
+
 export function getPostBySlug(slug: string): Post | null {
   for (const ext of [".mdx", ".md"]) {
     const filepath = path.join(postsDir, `${slug}${ext}`);
