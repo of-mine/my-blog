@@ -23,9 +23,10 @@ export default function SearchPage({ searchParams }: Props) {
     <>
       <Navbar />
 
-      <main className="max-w-4xl mx-auto px-4 py-10">
-        <section className="rounded-[28px] border border-white/70 bg-[rgba(255,255,255,0.84)] backdrop-blur-xl shadow-[0_24px_80px_rgba(45,74,73,0.14)] px-6 py-8 md:px-10 md:py-10">
+      <main className="px-4 py-10">
+        <section className="mx-auto w-full max-w-6xl rounded-[28px] border border-white/70 bg-[rgba(255,255,255,0.84)] px-6 py-8 shadow-[0_24px_80px_rgba(45,74,73,0.14)] backdrop-blur-xl md:px-10 md:py-10">
           <p className="text-xs uppercase tracking-[0.28em] text-stone-400 mb-4">站内搜索</p>
+          
           <SearchBar initialQuery={query} />
 
           {query ? (
@@ -39,7 +40,7 @@ export default function SearchPage({ searchParams }: Props) {
           )}
         </section>
 
-        <section className="mt-8">
+        <section className="mx-auto mt-8 max-w-4xl">
           {!query ? null : results.length === 0 ? (
             <div className="rounded-[24px] border border-dashed border-white/70 bg-white/55 px-6 py-16 text-center text-stone-400">
               没有找到匹配结果，试试换个关键词。

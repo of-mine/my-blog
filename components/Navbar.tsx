@@ -17,11 +17,12 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-[99] px-4 pt-4">
       <div className="max-w-6xl mx-auto rounded-[26px] border border-white/70 bg-[rgba(255,255,255,0.82)] px-4 py-3 shadow-[0_16px_55px_rgba(45,74,73,0.12)] backdrop-blur-xl md:px-5">
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="flex gap-4 items-center justify-between">
           <div className="flex flex-col gap-3 md:flex-row md:items-center">
             <Link href="/" className="no-underline">
               <span
                 style={{
+                  marginLeft: 20,
                   fontFamily: "'Lora', serif",
                   fontSize: 22,
                   fontWeight: 500,
@@ -54,7 +55,7 @@ export default function Navbar() {
             </nav>
           </div>
 
-          <SearchBar compact />
+          <SearchBar compact = {true}/>
         </div>
       </div>
     </header>
